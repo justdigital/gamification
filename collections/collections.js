@@ -1,0 +1,1 @@
+Justelecas = new Mongo.Collection('justelecas');

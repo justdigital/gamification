@@ -1,0 +1,24 @@
+template(name="send")
+	.container
+		form#send
+			.row
+				.input-field.col.s12.l6
+					input(type="text" name="name")#name
+					label(for="name") Nome
+				.input-field.col.s12.l6
+					select(name="category").category
+						option(value="x") Selecione uma categoria
+						option(value="pessoal" selected) Pessoal
+				.col.s12
+					if autocompleteUser
+						each autocompleteUsers
+							+autocompleteUser
+				.input-field.col.s12
+					textarea(name="message")#message.materialize-textarea
+					label(for="message") Mensagem
+				.input-field.col.s12
+					button.btn.waves-effect.waves-light.col.s8.offset-s2 Enviar
+
+template(name="autocompleteUser")
+	p #{username}
+

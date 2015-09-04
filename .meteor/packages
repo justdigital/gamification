@@ -5,10 +5,10 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
-insecure
 jquery
 stylus
 iron:router
 materialize:materialize
 mquandalle:jade
+useraccounts:materialize
+accounts-password

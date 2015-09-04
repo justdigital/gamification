@@ -1,13 +1,30 @@
 head
 	title App
 	meta(name="viewport" content="width=device-width, initial-scale=1")
-
+	link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
 body
-	//chama um helper chamado "title"
-	h1 {{title}}
+	header
+		nav.teal
+			.container
+				.nav-wraper
+					a(href="/").brand-logo Gamification
+					a(href="#" data-activates="mobile-demo").button-collapse: i.material-icons menu
+				ul.right.hide-on-med-and-down
+					+menu
+				ul.side-nav#mobile-demo
+					+menu
 
-	//renderiza um template
-	+Router 
+	section.section
+		+Router
 
-template(name="home")
-	h1 AEEEEEE
+template(name="menu")
+	li: a(href="send") Enviar
+	li: a(href="#!") Listar
+	li: a(href="#!") Mural
+	li: a(href="#!") Ranking
+	//so mostrar pra admin
+	li: a(href="#!") Admin
+	//adicionar icone de settings
+	li: a(href="#!") Config
+	if isLoggedIn
+		li: a(href="#!").logout Logout
