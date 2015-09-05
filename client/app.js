@@ -19,7 +19,7 @@ Template.menu.helpers({
 		return Meteor.user() != undefined;
 	},
 	isAdm: function() {
-		if (Meteor.userId) {
+		if (Meteor.userId()) {
 			Meteor.call('isAdmin', Meteor.userId(), function(err, data) {
 				if (!err) {
 					Session.set('adm', data);

@@ -4,15 +4,16 @@ head
 	link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
 body
 	header
-		nav.grey.darken-2
-			.container
-				.nav-wraper
-					a(href="/").brand-logo Gamification
-					a(href="#" data-activates="mobile-demo").button-collapse: i.material-icons menu
-				ul.right.hide-on-med-and-down
-					+menu
-				ul.side-nav#mobile-demo
-					+menu
+		.navbar-fixed
+			nav.grey.darken-2
+				.container
+					.nav-wraper
+						a(href="/").brand-logo Gamification
+						a(href="#" data-activates="mobile-demo").button-collapse: i.material-icons menu
+					ul.right.hide-on-med-and-down
+						+menu
+					ul.side-nav#mobile-demo
+						+menu
 
 	section.section
 		+Router
