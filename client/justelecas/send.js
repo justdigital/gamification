@@ -23,7 +23,7 @@ Template.send.events({
 				message: message.value,
 				when: new Date()
 			}
-			
+			console.log(justeleca);
 			Meteor.call("insert", justeleca, function(err, data) {
 				if (err) {
 					Materialize.toast(err.message, 4000);
@@ -42,8 +42,8 @@ Template.send.events({
 	},
 	'keyup #name': function(e) {
 		if (e.target.value.length >= 2) {
-			var regex = new RegExp(e.target.value);
-			Session.set('autocomplete', Meteor.users.find({username: { $regex: regex }, 'emails.0.verified': true}).fetch());
+			var regex = new RegExp(e.target.value, 'gi');
+			Session.set('autocomplete', Meteor.users.find({'profile.fullname': { $regex: regex }, 'emails.0.verified': true}).fetch());
 		} else {
 			Session.set('autocomplete', []);
 		}
@@ -52,7 +52,6 @@ Template.send.events({
 
 Template.autocompleteUser.helpers({
 	avatar: function () {
-		console.log(this);
 		if (this.profile.avatar) {
 			var avatar = Avatars.findOne(this.profile.avatar);
 			return avatar.url();
@@ -65,6 +64,7 @@ Template.autocompleteUser.helpers({
 Template.autocompleteUser.events({
 	'click .collection-item': function(e, t) {
 		$("#name").val(this.profile.fullname);
+		console.log(this.username);
 		Session.set('username', this.username);
 		Session.set('autocomplete', []);
 	}	

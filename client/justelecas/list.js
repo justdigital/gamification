@@ -55,9 +55,11 @@ Template.card.helpers({
 	},
 	recieverName: function () {
 		var self = this;
-		if (Session.get('usersReady')) { 
-			var user = Meteor.users.findOne({_id: self.reciever});
-			return user.profile.fullname;
+		if (Meteor.users.findOne()) {
+			if (Session.get('usersReady')) { 
+				var user = Meteor.users.findOne({_id: self.reciever});
+				return user.profile.fullname;
+			}
 		}
 	}
 });

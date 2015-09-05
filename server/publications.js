@@ -7,7 +7,7 @@ Meteor.publish("userNames", function () {
 });
 
 Meteor.publish("userInfo", function () {
-  return Meteor.users.find({}, {fields: {profile: 1, emails: 1}});
+  return Meteor.users.find({}, {fields: {username: 1, profile: 1, emails: 1}});
 });
 
 Meteor.publish("fullUser", function () {

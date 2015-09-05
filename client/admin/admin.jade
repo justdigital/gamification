@@ -1,8 +1,8 @@
 template(name="admin")
 	.container
 		h3.center Administrador
-		h4.left Usuários
-		table.responsive-table
+		h4 Usuários
+		table.responsive-table.row
 			thead
 				tr
 					th Nome Completo
@@ -14,7 +14,6 @@ template(name="admin")
 				each listUsers
 					tr 
 						td #{profile.fullname}
-						//- td #{username}
 						td {{emails.[0].address}}
 						if role
 							td
@@ -40,8 +39,8 @@ template(name="admin")
 		
 		.divider
 
-		h4.left Aprovação de Justelecas
-		table.responsive-table
+		h4 Aprovação de Justelecas
+		table.responsive-table.row
 			thead
 				tr
 					th De

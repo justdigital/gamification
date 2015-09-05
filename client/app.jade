@@ -4,7 +4,7 @@ head
 	link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
 body
 	header
-		nav.teal
+		nav.grey.darken-2
 			.container
 				.nav-wraper
 					a(href="/").brand-logo Gamification
@@ -16,6 +16,7 @@ body
 
 	section.section
 		+Router
+	+modal
 
 template(name="menu")
 	li(class="{{activeNav 'send'}}"): a(href="send") Enviar
