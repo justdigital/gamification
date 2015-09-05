@@ -22,6 +22,8 @@ template(name="send")
 
 template(name="autocompleteUser")
 	a(href="#").collection-item.avatar
-		img(src="http://placehold.it/64x64").circle
-		span(name="username").title #{username}
+		.imgWrapper.circle
+			img(src="#{avatar}")
+		span.title #{profile.fullname}
+		p {{emails.[0].address}}
 

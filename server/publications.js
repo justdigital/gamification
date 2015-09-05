@@ -1,4 +1,4 @@
-Meteor.publish('justelecas', function() {
+Meteor.publish("justelecas", function() {
 	return Justelecas.find();
 });
 
@@ -12,4 +12,8 @@ Meteor.publish("userInfo", function () {
 
 Meteor.publish("fullUser", function () {
   return Meteor.users.find({}, {fields: {services: 0}});
+});
+
+Meteor.publish("avatars", function() {
+	return Avatars.find();
 });

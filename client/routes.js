@@ -17,6 +17,7 @@ Router.route('/send', {
 		Session.set('activeNav', 'send');
 		this.subscribe('justelecas');
 		this.subscribe('userInfo');
+		this.subscribe('avatars');
 		this.next();
 	},
 	action: function() {
@@ -64,6 +65,7 @@ Router.route('/config', {
 	onBeforeAction: function() {
 		Session.set('activeNav', 'config');
 		Session.set('usersReady', false);
+		this.subscribe('avatars');
 		this.next();
 	},
 	action: function() {

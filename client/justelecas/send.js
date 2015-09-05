@@ -17,7 +17,7 @@ Template.send.events({
 		var message = e.target.message;
 		if (name.value != '' && message.value != '') {
 			var justeleca = {
-				reciever: name.value,
+				reciever: Session.get("username"),
 				sender: Meteor.user().username,
 				category: category.value,
 				message: message.value,
@@ -34,7 +34,7 @@ Template.send.events({
 			});
 
 			name.value = category.value = message.value = "";
-		} else if (sender.value == receiver.value) {
+		} else if (Meteor.user().username == Session.get("username")) {
 			Materialize.toast('Não é possível enviar para você mesmo.', 4000);
 		} else {
 			Materialize.toast('Todos os campos são obrigatórios.', 4000);
@@ -47,10 +47,25 @@ Template.send.events({
 		} else {
 			Session.set('autocomplete', []);
 		}
-	},
-	'click .collection-item': function(e, t) {
-		var userName = $(e.target).find(".title").html();
-		t.find("#name").value = userName;
-		Session.set('autocomplete', []);
 	}
+});
+
+Template.autocompleteUser.helpers({
+	avatar: function () {
+		console.log(this);
+		if (this.profile.avatar) {
+			var avatar = Avatars.findOne(this.profile.avatar);
+			return avatar.url();
+		} else {
+			return 'images/avatar.png';			
+		}
+	}
+});
+
+Template.autocompleteUser.events({
+	'click .collection-item': function(e, t) {
+		$("#name").val(this.profile.fullname);
+		Session.set('username', this.username);
+		Session.set('autocomplete', []);
+	}	
 })

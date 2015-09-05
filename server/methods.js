@@ -20,7 +20,12 @@ Meteor.methods({
 		}
 	},
 	updateUser: function(obj, userId) {
-		Meteor.users.update({_id: userId}, {$set: {username: obj.username, 'profile.fullname': obj.fullname, 'emails.0.address': obj.address}}, function(err, data) {
+		Meteor.users.update({_id: userId}, {$set: {
+			username: obj.username,
+			'profile.fullname': obj.fullname,
+			'profile.avatar': obj.avatar,
+			'emails.0.address': obj.address
+		}}, function(err, data) {
 			console.log(err, data);
 			if (err) {
 				throw new Meteor.Error(500, 'Algum erro ocorreu.');

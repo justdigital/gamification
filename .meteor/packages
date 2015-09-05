@@ -16,3 +16,6 @@ momentjs:moment
 rzymek:moment-locale-pt-br
 wollardj:timeago
 useraccounts:iron-routing
+cfs:standard-packages
+cfs:dropbox
+cfs:filesystem
