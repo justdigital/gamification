@@ -12,3 +12,7 @@ materialize:materialize
 mquandalle:jade
 useraccounts:materialize
 accounts-password
+momentjs:moment
+rzymek:moment-locale-pt-br
+wollardj:timeago
+useraccounts:iron-routing

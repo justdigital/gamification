@@ -1,0 +1,31 @@
+template(name="list")
+	.container
+		.row
+			ul.tabs
+				li.tab.col.s6 
+					a(href="#" class="{{active 'sent'}}")#sent Enviadas 
+						span.right.grey-text.text-darken-2 {{counter "sent"}}
+				li.tab.col.s6 
+					a(href="#" class="{{active 'recieved'}}")#recieved Recebidas
+						span.right.grey-text.text-darken-2 {{counter "received"}}
+	.container
+		.row
+			if tabSent
+				each cardsSent
+					+card
+			else
+				each cardsRecieved
+					+card
+
+template(name="card")
+	| {{test}}
+	.col.s6
+		.card.lighthen-1.blue-grey
+			.card-content.white-text
+				span.card-title 
+					| De: #{senderName}
+					br
+					| Para: #{recieverName}
+				p #{message}
+			.card-content
+				p.white-text {{> timeago when}}

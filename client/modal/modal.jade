@@ -1,0 +1,8 @@
+template(name="modal")
+	.modal#modal-prompt
+		.modal-content
+			h4 #{modalTitle}
+			p #{modalBody}
+		.modal-footer
+			a(href="#").modal-action.modal-close.waves-effect.waves-red.btn-flat#modalDecline Não
+			a(href="#").modal-action.modal-close.waves-effect.waves-green.btn-flat#modalConfirm Sim

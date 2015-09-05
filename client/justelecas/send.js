@@ -1,14 +1,11 @@
-users = [];
-
 Template.send.rendered = function() {
 	$("#send .category").material_select();
+	Session.set('autocomplete', []);
 }
 
 Template.send.helpers({
 	autocompleteUsers: function() {
-		if (users[0]) {
-			return users;
-		}
+		return Session.get('autocomplete');
 	}
 });
 
@@ -19,8 +16,6 @@ Template.send.events({
 		var category = e.target.category;
 		var message = e.target.message;
 		if (name.value != '' && message.value != '') {
-			Materialize.toast('Inserindo...', 4000);
-
 			var justeleca = {
 				reciever: name.value,
 				sender: Meteor.user().username,
@@ -31,7 +26,7 @@ Template.send.events({
 			
 			Meteor.call("insert", justeleca, function(err, data) {
 				if (err) {
-					Materialize.toast("Algum erro ocorreu.", 4000);
+					Materialize.toast(err.message, 4000);
 					console.log(err);
 				} else {
 					Materialize.toast('Inserido com sucesso!', 4000);
@@ -39,6 +34,8 @@ Template.send.events({
 			});
 
 			name.value = category.value = message.value = "";
+		} else if (sender.value == receiver.value) {
+			Materialize.toast('Não é possível enviar para você mesmo.', 4000);
 		} else {
 			Materialize.toast('Todos os campos são obrigatórios.', 4000);
 		}
@@ -46,7 +43,14 @@ Template.send.events({
 	'keyup #name': function(e) {
 		if (e.target.value.length >= 2) {
 			var regex = new RegExp(e.target.value);
-			users = Meteor.users.find({username: { $regex: regex }}).fetch();
+			Session.set('autocomplete', Meteor.users.find({username: { $regex: regex }, 'emails.0.verified': true}).fetch());
+		} else {
+			Session.set('autocomplete', []);
 		}
+	},
+	'click .collection-item': function(e, t) {
+		var userName = $(e.target).find(".title").html();
+		t.find("#name").value = userName;
+		Session.set('autocomplete', []);
 	}
 })

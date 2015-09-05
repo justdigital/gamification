@@ -5,14 +5,15 @@ template(name="send")
 				.input-field.col.s12.l6
 					input(type="text" name="name")#name
 					label(for="name") Nome
+					if autocompleteUsers
+						.collection
+							each autocompleteUsers
+								+autocompleteUser
 				.input-field.col.s12.l6
 					select(name="category").category
-						option(value="x") Selecione uma categoria
-						option(value="pessoal" selected) Pessoal
-				.col.s12
-					if autocompleteUser
-						each autocompleteUsers
-							+autocompleteUser
+						option(value="default" selected) Selecione uma categoria
+						option(value="pessoal") Pessoal
+					label Categoria
 				.input-field.col.s12
 					textarea(name="message")#message.materialize-textarea
 					label(for="message") Mensagem
@@ -20,5 +21,7 @@ template(name="send")
 					button.btn.waves-effect.waves-light.col.s8.offset-s2 Enviar
 
 template(name="autocompleteUser")
-	p #{username}
+	a(href="#").collection-item.avatar
+		img(src="http://placehold.it/64x64").circle
+		span(name="username").title #{username}
 

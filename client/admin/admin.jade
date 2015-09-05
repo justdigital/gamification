@@ -1,0 +1,72 @@
+template(name="admin")
+	.container
+		h3.center Administrador
+		h4.left Usuários
+		table.responsive-table
+			thead
+				tr
+					th Nome Completo
+					th E-mail
+					th Admin
+					th Aprovado
+					th 
+			tbody
+				each listUsers
+					tr 
+						td #{profile.fullname}
+						//- td #{username}
+						td {{emails.[0].address}}
+						if role
+							td
+								p
+									input(type="checkbox" checked="checked" id="adm_{{username}}").filled-in.isAdmin
+									label(for="adm_{{username}}").center
+						else
+							td 
+								p
+									input(type="checkbox" id="adm_{{username}}").filled-in.isAdmin
+									label(for="adm_{{username}}").center
+						if emails.[0].verified
+							td 
+								p
+									input(type="checkbox" checked="checked" id="verif_{{username}}").filled-in.emailVerified
+									label(for="verif_{{username}}").center
+						else
+							td
+								p
+									input(type="checkbox" id="verif_{{username}}").filled-in.emailVerified
+									label(for="verif_{{username}}").center
+						td: a(href="#").edit.btn.red.removeUser Excluir
+		
+		.divider
+
+		h4.left Aprovação de Justelecas
+		table.responsive-table
+			thead
+				tr
+					th De
+					th Para
+					th Motivo
+					th Quando
+					th Aprovado
+					th 
+			tbody
+				each listJustelecas
+					tr 
+						td #{senderName}
+						td #{recieverName}
+						td #{message}
+						td {{> timeago when}}
+						if approved
+							td
+								p
+									input(type="checkbox" checked="checked" id="approve_{{_id}}").filled-in.isApproved
+									label(for="approve_{{_id}}").center
+						else
+							td 
+								p
+									input(type="checkbox" id="approve_{{_id}}").filled-in.isApproved
+									label(for="approve_{{_id}}").center
+						td: a(href="#").edit.btn.red.removeCard Excluir
+		.divider
+		

@@ -1,0 +1,17 @@
+template(name="config")
+	.container
+		h3.center Configurações
+		h5.left.grey-text.text-darken-3 Informações do Usuário
+		.row
+			.col.s12
+				form#editUser
+					label Username
+					input(type="text" value="#{user.username}" name="username")
+
+					label Nome Completo
+					input(type="text" value="#{user.profile.fullname}" name="fullname")
+					
+					label E-mail
+					input(type="email" value="{{user.emails.[0].address}}" name="email")
+
+					button(type="submit").btn.waves-effect.waves-light.col.s8.offset-s2 Salvar
