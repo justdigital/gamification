@@ -25,6 +25,7 @@ Abrir o browser e utilizar o aplicativo em [localhost:3000](http://localhost:300
 
 
 #### Time
+
 O time consiste nos 4 desenvolvedores escolhidos aleatoriamente durante o evento:
 - ##### Caio Lima 
 - ##### Lucas Oliveira
@@ -32,6 +33,7 @@ O time consiste nos 4 desenvolvedores escolhidos aleatoriamente durante o evento
 - ##### Rodrigo Santos
 
 #### Pacotes
+
 O [Meteor.js](https://meteor.com) oferece um repositorio enorme de pacotes chamado [Atmosphere](atmospherejs.com).
 
 Os pacotes utilizados no projeto foram:
@@ -48,3 +50,20 @@ Os pacotes utilizados no projeto foram:
 - [momentjs:moment]()
 - [wollardj:timeago]()
 - [rzymek:moment-locale-pt-br]()
+
+#### TO DO
+
+- Adicionar botão de remover justeleca enviada
+	- O usuario so poderá deletar a propria justeleca.
+	- O usuario so poderá deletar a justeleca se ela ainda não estiver aprovada.
+- Adicionar pacote para mudar a tag <title> para cada página
+	- Cada página tera uma tag title diferente que será definida nas rotas
+- Montar o "ranking" (devemos mudar o nome)
+	- Separar por "temporada" (tambem precisamos pensar num nome)
+	- Criar um painel administrativo pra genrenciar estas "temporadas" e quando será liberado os dados da nova "temporada"
+- Adicionar filtros nas páginas que listam justelecas
+	- Filtros:
+		- Data
+		- Pessoa
+		- "Temporada"
+		- Categoria
