@@ -1,7 +1,6 @@
 Meteor.methods({
 	insert: function(reciever, category, message, timestamp) {
 		if (Meteor.user()) {
-			var reciever = Meteor.users.findOne({username: reciever})._id;
 			if (reciever != Meteor.userId()) {
 				if (!Meteor.user().emails[0].verified || 
 					!Meteor.users.findOne(reciever).emails[0].verified) {

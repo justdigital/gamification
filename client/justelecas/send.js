@@ -1,6 +1,7 @@
 Template.send.rendered = function() {
 	$("#send .category").material_select();
 	Session.set('autocomplete', []);
+	Session.set('clicked', null);
 }
 
 Template.send.helpers({
@@ -16,8 +17,8 @@ Template.send.events({
 		var category = e.target.category;
 		var message = e.target.message;
 		var timestamp = new Date();
-		if (name.value != '' && message.value != '' && Session.get('username')) {
-			Meteor.call("insert", Session.get('username'), category.value, message.value, timestamp, function(err, data) {
+		if (name.value != '' && message.value != '' && Session.get('clicked') != null) {
+			Meteor.call("insert", Session.get('clicked'), category.value, message.value, timestamp, function(err, data) {
 				if (err) {
 					Materialize.toast(err.message, 4000);
 					console.log(err);
@@ -57,8 +58,7 @@ Template.autocompleteUser.helpers({
 Template.autocompleteUser.events({
 	'click .collection-item': function(e, t) {
 		$("#name").val(this.profile.fullname);
-		console.log(this.username);
-		Session.set('username', this.username);
+		Session.set('clicked', this._id);
 		Session.set('autocomplete', []);
 	}	
 })

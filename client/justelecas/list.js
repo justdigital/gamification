@@ -47,14 +47,14 @@ Template.list.events({
 Template.card.helpers({
 	senderName: function () {
 		var self = this;
-		if (Session.get('usersReady')) { 
+		if (Meteor.users.findOne()) { 
 			var user = Meteor.users.findOne({_id: self.sender});
 			return user.profile.fullname;
 		}
 	},
 	recieverName: function () {
 		var self = this;
-		if (Session.get('usersReady')) { 
+		if (Meteor.users.findOne()) { 
 			var user = Meteor.users.findOne({_id: self.reciever});
 			return user.profile.fullname;
 		}

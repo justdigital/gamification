@@ -3,15 +3,15 @@ template(name="config")
 		h3.center Configurações
 		h5.grey-text.text-darken-3 Informações do Usuário
 		.row
-			form#editUser.col.s12
+			form#editcol.s12
 				label Username
-				input(type="text" value="#{user.username}" name="username")
+				input(type="text" value="#{username}" name="username")
 
 				label Nome Completo
-				input(type="text" value="#{user.profile.fullname}" name="fullname")
+				input(type="text" value="#{profile.fullname}" name="fullname")
 				
 				label E-mail
-				input(type="email" value="{{user.emails.[0].address}}" name="email")
+				input(type="email" value="{{emails.[0].address}}" name="email")
 				
 				label Avatar
 				.row
