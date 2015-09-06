@@ -15,12 +15,10 @@ Template.menu.helpers({
 		if (name == Session.get('activeNav')) {
 			return 'active';
 		}
-
-		return Meteor.user() != undefined;
 	},
 	isAdm: function() {
 		if (Meteor.userId()) {
-			Meteor.call('isAdmin', Meteor.userId(), function(err, data) {
+			Meteor.call('isAdmin', function(err, data) {
 				if (!err) {
 					Session.set('adm', data);
 				}

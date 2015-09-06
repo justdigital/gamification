@@ -24,6 +24,14 @@ Template.admin.helpers({
 			var user = Meteor.users.findOne({_id: self.reciever});
 			return user.profile.fullname;
 		}
+	},
+	avatar: function () {
+		if (this.profile.avatar) {
+			var avatar = Avatars.findOne(this.profile.avatar);
+			return avatar.url();
+		} else {
+			return 'images/avatar.png';			
+		}
 	}
 });
 

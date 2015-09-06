@@ -15,16 +15,9 @@ Template.send.events({
 		var name = e.target.name;
 		var category = e.target.category;
 		var message = e.target.message;
-		if (name.value != '' && message.value != '') {
-			var justeleca = {
-				reciever: Session.get("username"),
-				sender: Meteor.user().username,
-				category: category.value,
-				message: message.value,
-				when: new Date()
-			}
-			console.log(justeleca);
-			Meteor.call("insert", justeleca, function(err, data) {
+		var timestamp = new Date();
+		if (name.value != '' && message.value != '' && Session.get('username')) {
+			Meteor.call("insert", Session.get('username'), category.value, message.value, timestamp, function(err, data) {
 				if (err) {
 					Materialize.toast(err.message, 4000);
 					console.log(err);
@@ -32,8 +25,8 @@ Template.send.events({
 					Materialize.toast('Inserido com sucesso!', 4000);
 				}
 			});
-
 			name.value = category.value = message.value = "";
+			Session.set('username', false)
 		} else if (Meteor.user().username == Session.get("username")) {
 			Materialize.toast('Não é possível enviar para você mesmo.', 4000);
 		} else {

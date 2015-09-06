@@ -5,6 +5,7 @@ template(name="admin")
 		table.responsive-table.row
 			thead
 				tr
+					th
 					th Nome Completo
 					th E-mail
 					th Admin
@@ -13,26 +14,29 @@ template(name="admin")
 			tbody
 				each listUsers
 					tr 
+						td
+							.imgWrapper.circle.z-depth-1
+								img(src="#{avatar}")
 						td #{profile.fullname}
 						td {{emails.[0].address}}
 						if role
 							td
-								p
+								p.center
 									input(type="checkbox" checked="checked" id="adm_{{username}}").filled-in.isAdmin
 									label(for="adm_{{username}}").center
 						else
 							td 
-								p
+								p.center
 									input(type="checkbox" id="adm_{{username}}").filled-in.isAdmin
 									label(for="adm_{{username}}").center
 						if emails.[0].verified
 							td 
-								p
+								p.center
 									input(type="checkbox" checked="checked" id="verif_{{username}}").filled-in.emailVerified
 									label(for="verif_{{username}}").center
 						else
 							td
-								p
+								p.center
 									input(type="checkbox" id="verif_{{username}}").filled-in.emailVerified
 									label(for="verif_{{username}}").center
 						td: a(href="#").edit.btn.red.removeUser Excluir
@@ -58,12 +62,12 @@ template(name="admin")
 						td {{> timeago when}}
 						if approved
 							td
-								p
+								p.center
 									input(type="checkbox" checked="checked" id="approve_{{_id}}").filled-in.isApproved
 									label(for="approve_{{_id}}").center
 						else
 							td 
-								p
+								p.center
 									input(type="checkbox" id="approve_{{_id}}").filled-in.isApproved
 									label(for="approve_{{_id}}").center
 						td: a(href="#").edit.btn.red.removeCard Excluir

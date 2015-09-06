@@ -1,103 +1,127 @@
 Meteor.methods({
-	insert: function(obj) {
-		if (obj.reciever != obj.sender) { 
-			obj.reciever = Meteor.users.findOne({username: obj.reciever})._id;
-			obj.sender = Meteor.users.findOne({username: obj.sender})._id;
-			if (!Meteor.users.findOne({_id: obj.sender}).emails[0].verified || 
-				!Meteor.users.findOne({_id: obj.reciever}).emails[0].verified) {
-				throw new Meteor.Error(500, 'Usuário não aprovado.');
-				return false;
+	insert: function(reciever, category, message, timestamp) {
+		if (Meteor.user()) {
+			var reciever = Meteor.users.findOne({username: reciever})._id;
+			if (reciever != Meteor.userId()) {
+				if (!Meteor.user().emails[0].verified || 
+					!Meteor.users.findOne(reciever).emails[0].verified) {
+					throw new Meteor.Error(500, 'Usuário não aprovado.');
+				} else {
+					var justeleca = {
+						reciever: reciever,
+						sender: Meteor.userId(),
+						category: category,
+						message: message,
+						when: timestamp
+					}
+					Justelecas.insert(justeleca, function(err) {
+						if (err) {
+							throw new Meteor.Error(500, 'Algum erro ocorreu.');
+						} else {
+							return true;
+						}
+					});
+				}
+			} else {
+				throw new Meteor.Error(500, 'O destinatário não pode ser você');	
 			}
-			Justelecas.insert(obj, function(err) {
+		}
+	},
+	updateUser: function(obj) { //retrabalhar
+		if (Meteor.user()) {
+			Meteor.users.update({_id: Meteor.userId()}, {$set: {
+				username: obj.username,
+				'profile.fullname': obj.fullname,
+				'profile.avatar': obj.avatar,
+				'emails.0.address': obj.address
+			}}, function(err, data) {
+				console.log(err, data);
 				if (err) {
 					throw new Meteor.Error(500, 'Algum erro ocorreu.');
 				} else {
 					return true;
 				}
 			});
-		} else {
-			throw new Meteor.Error(500, 'O destinatário não pode ser você');
 		}
 	},
-	updateUser: function(obj, userId) {
-		Meteor.users.update({_id: userId}, {$set: {
-			username: obj.username,
-			'profile.fullname': obj.fullname,
-			'profile.avatar': obj.avatar,
-			'emails.0.address': obj.address
-		}}, function(err, data) {
-			console.log(err, data);
-			if (err) {
-				throw new Meteor.Error(500, 'Algum erro ocorreu.');
-			} else {
-				return true;
-			}
-		});
-	},
 	updateRole: function(obj, userId) {
-		Meteor.users.update({_id: userId}, {$set: {role: obj.role}}, function(err, data) {
-			console.log(err, data);
-			if (err) {
-				throw new Meteor.Error(500, 'Algum erro ocorreu.');
-			} else {
-				return true;
-			}
-		});
+		if (Meteor.user().role) {
+			Meteor.users.update({_id: userId}, {$set: {role: obj.role}}, function(err, data) {
+				console.log(err, data);
+				if (err) {
+					throw new Meteor.Error(500, 'Algum erro ocorreu.');
+				} else {
+					return true;
+				}
+			});
+		}
 	},
 	aproveUser: function(obj, userId) {
-		Meteor.users.update({_id: userId}, {$set: {'emails.0.verified': obj.verified}}, function(err, data) {
-			console.log(err, data);
-			if (err) {
-				throw new Meteor.Error(500, 'Algum erro ocorreu.');
-			} else {
-				return true;
-			}
-		});
+		if (Meteor.user().role) {
+			Meteor.users.update({_id: userId}, {$set: {'emails.0.verified': obj.verified}}, function(err, data) {
+				console.log(err, data);
+				if (err) {
+					throw new Meteor.Error(500, 'Algum erro ocorreu.');
+				} else {
+					return true;
+				}
+			});
+		}
 	},
 	aproveCard: function(obj, id) {
-		Justelecas.update({_id: id}, {$set: {approved: obj.approved}}, function(err, data) {
-			console.log(err, data);
-			if (err) {
-				throw new Meteor.Error(500, 'Algum erro ocorreu.');
-			} else {
-				return true;
-			}
-		});
+		if (Meteor.user().role) {
+			Justelecas.update({_id: id}, {$set: {approved: obj.approved}}, function(err, data) {
+				console.log(err, data);
+				if (err) {
+					throw new Meteor.Error(500, 'Algum erro ocorreu.');
+				} else {
+					return true;
+				}
+			});
+		}
 	},
 	removeUser: function(userId) {
-		Meteor.users.remove({_id: userId}, function(err, data) {
-			console.log(err, data);
-			if (err) {
-				throw new Meteor.Error(500, 'Algum erro ocorreu.');
-			} else {
-				return true;
-			}			
-		})
+		if (Meteor.user().role) {
+			Meteor.users.remove({_id: userId}, function(err, data) {
+				console.log(err, data);
+				if (err) {
+					throw new Meteor.Error(500, 'Algum erro ocorreu.');
+				} else {
+					return true;
+				}			
+			})
+		}
 	},
 	removeCard: function(id) {
-		Justelecas.remove({_id: id}, function(err, data) {
-			console.log(err, data);
-			if (err) {
-				throw new Meteor.Error(500, 'Algum erro ocorreu.');
-			} else {
-				return true;
-			}			
-		})
+		if (Meteor.user().role) {
+			Justelecas.remove({_id: id}, function(err, data) {
+				console.log(err, data);
+				if (err) {
+					throw new Meteor.Error(500, 'Algum erro ocorreu.');
+				} else {
+					return true;
+				}			
+			})
+		} else {
+			throw new Meteor.Error(500, 'Você não tem permissão!');			
+		}
 	},
-	isAdmin: function(userId) {
-		var user = Meteor.users.findOne({_id: userId});
-		if (user.role == 1) {
+	isAdmin: function() {
+		if (Meteor.user().role) {
 			return true;
 		} else {
 			return false;
 		}
 	},
-	canSend: function(userId) {
-		var user = Meteor.users.findOne({_id: userId});
+	canSend: function() {
+		var user = Meteor.users.findOne({_id: Meteor.userId()});
 		if (user.emails[0].verified == true) {
 			return true;
 		} else {
 			return false;
 		}
+	},
+	test: function() {
+		console.log(Meteor.user());
 	}
 })

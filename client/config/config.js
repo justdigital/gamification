@@ -5,16 +5,13 @@ Template.config.rendered = function() {
 Template.config.events({
 	'submit #editUser': function(e) {
 		e.preventDefault();
-		var username = e.target.username.value,
-			fullname = e.target.fullname.value,
-			email = e.target.email.value;
+		var username = e.target.username.value;
+		var fullname = e.target.fullname.value;
+		var email = e.target.email.value;
 		if (username.length < 5) username = '';
 		if (fullname.length < 5) fullname = '';
 		if (email.length < 10) email = '';
-
-
 		if (username != '' && fullname != '' && email != '') {
-
 			var update = function() {
 				Meteor.call('updateUser', profile, Meteor.userId(), function(err, data) {
 					if (err) {
@@ -25,16 +22,13 @@ Template.config.events({
 					}
 				})
 			}
-
 			var profile = {
 				username: username,
 				fullname: fullname,
 				address: email,
-				avatar: null
+				avatar: Meteor.user().profile.avatar || null
 			}
-
 			var files = e.target.files.files;
-
 			if (files.length > 0) {
 				for (var i = 0, ln = files.length; i < ln; i++) {
 					Avatars.insert(files[i], function (err, fileObj) {
@@ -48,15 +42,6 @@ Template.config.events({
 			} else {
 				update();
 			}
-
-
 		}
 	},
-	// 'change .file': function(e, t) {
-	// 	FS.Utility.eachFile(event, function(file) {
-	// 		Avatars.insert(file, function (err, fileObj) {
-	// 			console.log(err, fileObj);	
-	// 		});
-	// 	});
-	// }
 })

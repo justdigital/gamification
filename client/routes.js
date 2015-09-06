@@ -22,14 +22,14 @@ Router.route('/send', {
 	},
 	action: function() {
 		var self = this;
-		Meteor.call('canSend', Meteor.userId(), function(err, data) {
+		Meteor.call('canSend', function(err, data) {
 			if (data) {
 				self.render('send');
 			} else {
 				self.render('home');
 				Session.set('denied', true);
 			}
-		})
+		});
 	}
 });
 
@@ -83,10 +83,19 @@ Router.route('/admin', {
 		Session.set('activeNav', 'admin');
 		this.subscribe('fullUser');
 		this.subscribe('justelecas');
+		this.subscribe('avatars');
 		this.next();
 	},
 	action: function() {
-		this.render('admin');
+		var self = this;
+		Meteor.call('isAdmin', function(err, data) {
+			if (data) {
+				self.render('admin');
+			} else {
+				self.render('home');
+				Session.set('denied', true);
+			}
+		})
 	}
 });
 
