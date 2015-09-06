@@ -56,7 +56,7 @@ Os pacotes utilizados no projeto foram:
 - Adicionar botão de remover justeleca enviada
 	- O usuario so poderá deletar a propria justeleca.
 	- O usuario so poderá deletar a justeleca se ela ainda não estiver aprovada.
-- Adicionar pacote para mudar a tag <title> para cada página
+- Adicionar pacote para mudar a tag TITLE para cada página
 	- Cada página tera uma tag title diferente que será definida nas rotas
 - Montar o "ranking" (devemos mudar o nome)
 	- Separar por "temporada" (tambem precisamos pensar num nome)
