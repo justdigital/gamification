@@ -32,7 +32,7 @@ O time consiste nos 4 desenvolvedores escolhidos aleatoriamente durante o evento
 - ##### Rodrigo Santos
 
 #### Pacotes
-O [Meteor.js](https://meteor.com) oferece um repositorio enorme de pacotes chamado [Atmosphere]atmospherejs.com).
+O [Meteor.js](https://meteor.com) oferece um repositorio enorme de pacotes chamado [Atmosphere](atmospherejs.com).
 
 Os pacotes utilizados no projeto foram:
 - [mquandalle:jade]()
