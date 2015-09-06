@@ -13,7 +13,6 @@ Template.list.helpers({
 		} else {
 			return false;
 		}
-
 	},
 	cardsSent: function() {
 		if (Meteor.user()) {
@@ -55,11 +54,16 @@ Template.card.helpers({
 	},
 	recieverName: function () {
 		var self = this;
-		if (Meteor.users.findOne()) {
-			if (Session.get('usersReady')) { 
-				var user = Meteor.users.findOne({_id: self.reciever});
-				return user.profile.fullname;
-			}
+		if (Session.get('usersReady')) { 
+			var user = Meteor.users.findOne({_id: self.reciever});
+			return user.profile.fullname;
+		}
+	},
+	color: function() {
+		if (this.category == 'pessoal') {
+			return 'blue-grey';
+		} else {
+			return 'grey';
 		}
 	}
 });
