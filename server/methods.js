@@ -94,7 +94,6 @@ Meteor.methods({
 	removeCard: function(id) {
 		if (Meteor.user().role) {
 			Justelecas.remove({_id: id}, function(err, data) {
-				console.log(err, data);
 				if (err) {
 					throw new Meteor.Error(500, 'Algum erro ocorreu.');
 				} else {
@@ -106,8 +105,12 @@ Meteor.methods({
 		}
 	},
 	isAdmin: function() {
-		if (Meteor.user().role) {
-			return true;
+		if (Meteor.user()) {
+			if (Meteor.user().role) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -119,8 +122,5 @@ Meteor.methods({
 		} else {
 			return false;
 		}
-	},
-	test: function() {
-		console.log(Meteor.user());
 	}
 })

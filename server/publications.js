@@ -5,41 +5,54 @@
 Meteor.publish("userInfo", function (fields) {
 
 	/*
-		"Meteor.user()" não pode ser acessado em publications.
-		Devemos usar "this.userId" para acessar as informações do usuario.
+		Checa se o ursuario esta logado.
 	*/
-	if (!Meteor.users.findOne(this.userId).role) {
+	if (this.userId) {
 
 		/*
-			Remove o campo role da query por segunrança.
+			"Meteor.user()" não pode ser acessado em publications.
+			Devemos usar "this.userId" para acessar as informações do usuario.
 		*/
-		delete fields.role;
+		if (!Meteor.users.findOne(this.userId).role) {
 
-		/*
-			Remove o campo services da query por segunrança.
-		*/
-		delete fields.services;
-
-		/*
-			Checa se o objeto esta vazio, para evitar o retorno de todos os dados da collection.
-		*/
-		if (Object.keys(fields).length === 0) {
-
-			/* 
-				Retorna o metodo ready para que o cliente não fique em looping eterno.
+			/*
+				Remove o campo role da query por segunrança.
 			*/
-			return this.ready();
-		}
-	}
+			delete fields.role;
 
-	/*
-		Retorna dos campos especificanos no parametro "fields".
-		Podemos retornar mais de uma collection, basta retornar um array de com as collections.
-	*/
-  return [
-  	Meteor.users.find({}, {fields: fields}),
-  	Avatars.find()
-  ]
+			/*
+				Remove o campo services da query por segunrança.
+			*/
+			delete fields.services;
+
+			/*
+				Checa se o objeto esta vazio, para evitar o retorno de todos os dados da collection.
+			*/
+			if (Object.keys(fields).length === 0) {
+
+				/* 
+					Retorna o metodo ready para que o cliente não fique em looping eterno.
+				*/
+				return this.ready();
+			}
+		}
+
+		/*
+			Retorna dos campos especificanos no parametro "fields".
+			Podemos retornar mais de uma collection, basta retornar um array de com as collections.
+		*/
+	  return [
+	  	Meteor.users.find({}, {fields: fields}),
+	  	Avatars.find()
+	  ];
+	} else {
+
+
+		/* 
+			Retorna o metodo ready para que o cliente não fique em looping eterno.
+		*/
+		return this.ready();
+	}
 });
 
 /*  --  */
