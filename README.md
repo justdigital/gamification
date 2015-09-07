@@ -27,10 +27,10 @@ Abrir o browser e utilizar o aplicativo em [localhost:3000](http://localhost:300
 #### Time
 
 O time consiste nos 4 desenvolvedores escolhidos aleatoriamente durante o evento:
-##### Caio Lima #####
-##### Lucas Oliveira #####
-##### Murilo Bastos #####
-##### Rodrigo Santos #####
+####### Caio Lima #######
+####### Lucas Oliveira #######
+####### Murilo Bastos #######
+####### Rodrigo Santos #######
 
 #### Pacotes
 
@@ -50,6 +50,7 @@ Os pacotes utilizados no projeto foram:
 - [momentjs:moment]()
 - [wollardj:timeago]()
 - [rzymek:moment-locale-pt-br]()
+- [danappelxx:eggjs](https://atmospherejs.com/danappelxx/eggjs)
 
 #### TO DO
 

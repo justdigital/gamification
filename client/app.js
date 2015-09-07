@@ -5,6 +5,21 @@ Template.body.rendered = function() {
       closeOnClick: true
     }
   );
+
+  var egg = new Egg();
+  var eggWraper = $(".easterEgg");
+  egg
+  	.addCode("s,i,m", function(){
+  		eggWraper.css({
+  			right: 0
+  		});
+  		setTimeout(function() {
+  			eggWraper.css({
+	  			right: '-425px'
+	  		});
+  		}, 500);
+  	})
+  	.listen();
 }
 
 Template.menu.helpers({

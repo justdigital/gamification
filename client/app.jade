@@ -18,6 +18,7 @@ body
 	section.section
 		+Router
 	+modal
+	+easterEgg
 
 template(name="menu")
 	li(class="{{activeNav 'send'}}"): a(href="send") Enviar
@@ -31,3 +32,7 @@ template(name="menu")
 	li(class="{{activeNav 'config'}}"): a(href="config") Config
 	if isLoggedIn
 		li: a(href="#!").logout Logout
+
+template(name="easterEgg")
+	.easterEgg
+		img(src="https://demaisdaconta.files.wordpress.com/2010/11/robson-caetano-no-broz.jpg")
