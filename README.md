@@ -37,19 +37,19 @@ O time consiste nos 4 desenvolvedores escolhidos aleatoriamente durante o evento
 O [Meteor.js](https://meteor.com) oferece um repositorio enorme de pacotes chamado [Atmosphere](atmospherejs.com).
 
 Os pacotes utilizados no projeto foram:
-- [mquandalle:jade]()
-- [stylus]()
-- [materialize:materialize]()
-- [iron:router]()
-- [useraccounts:iron-routing]()
-- [accounts-password]()
-- [jquery]()
-- [cfs:standard-packages]()
-- [cfs:filesystem]()
-- [cfs:dropbox]()
-- [momentjs:moment]()
-- [wollardj:timeago]()
-- [rzymek:moment-locale-pt-br]()
+- [mquandalle:jade](https://atmospherejs.com/mquandalle)
+- [stylus](https://atmospherejs.com/meteor/stylus)
+- [materialize:materialize](https://atmospherejs.com/materialize/materialize)
+- [iron:router](https://atmospherejs.com/iron/router)
+- [useraccounts:iron-routing](https://atmospherejs.com/useraccounts/iron-routing)
+- [accounts-password](https://atmospherejs.com/meteor/accounts-password)
+- [jquery](https://atmospherejs.com/meteor/jquery)
+- [cfs:standard-packages](https://atmospherejs.com/cfs/standard-packages)
+- [cfs:filesystem](https://atmospherejs.com/cfs/filesystem)
+- [cfs:dropbox](https://atmospherejs.com/cfs/dropbox)
+- [momentjs:moment](https://atmospherejs.com/momentjs/moment)
+- [wollardj:timeago](https://atmospherejs.com/wollardj/timeago)
+- [rzymek:moment-locale-pt-br](https://atmospherejs.com/rzymek/moment-locale-pt-br)
 - [danappelxx:eggjs](https://atmospherejs.com/danappelxx/eggjs)
 
 #### TO DO
