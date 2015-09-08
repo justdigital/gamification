@@ -34,7 +34,6 @@ Meteor.methods({
 				'profile.avatar': obj.avatar,
 				'emails.0.address': obj.address
 			}}, function(err, data) {
-				console.log(err, data);
 				if (err) {
 					throw new Meteor.Error(500, 'Algum erro ocorreu.');
 				} else {
@@ -46,7 +45,6 @@ Meteor.methods({
 	updateRole: function(obj, userId) {
 		if (Meteor.user().role) {
 			Meteor.users.update({_id: userId}, {$set: {role: obj.role}}, function(err, data) {
-				console.log(err, data);
 				if (err) {
 					throw new Meteor.Error(500, 'Algum erro ocorreu.');
 				} else {
@@ -58,7 +56,6 @@ Meteor.methods({
 	aproveUser: function(obj, userId) {
 		if (Meteor.user().role) {
 			Meteor.users.update({_id: userId}, {$set: {'emails.0.verified': obj.verified}}, function(err, data) {
-				console.log(err, data);
 				if (err) {
 					throw new Meteor.Error(500, 'Algum erro ocorreu.');
 				} else {
@@ -70,7 +67,6 @@ Meteor.methods({
 	aproveCard: function(obj, id) {
 		if (Meteor.user().role) {
 			Justelecas.update({_id: id}, {$set: {approved: obj.approved}}, function(err, data) {
-				console.log(err, data);
 				if (err) {
 					throw new Meteor.Error(500, 'Algum erro ocorreu.');
 				} else {
@@ -82,7 +78,6 @@ Meteor.methods({
 	removeUser: function(userId) {
 		if (Meteor.user().role) {
 			Meteor.users.remove({_id: userId}, function(err, data) {
-				console.log(err, data);
 				if (err) {
 					throw new Meteor.Error(500, 'Algum erro ocorreu.');
 				} else {
@@ -168,6 +163,16 @@ Meteor.methods({
 			});
 		} else {
 			throw new Meteor.Error(500, 'Usuário não autenticado.');
+		}
+	},
+	checkFirst: function() {
+		var count = Meteor.users.find().fetch().length;
+		if (count == 1) {
+			var user = Meteor.users.findOne();
+			if (!user.role) {
+				Meteor.users.update({_id: user._id}, {$set: {role: 1}});
+				return true;
+			}
 		}
 	}
 })
