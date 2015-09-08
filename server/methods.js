@@ -122,5 +122,28 @@ Meteor.methods({
 		} else {
 			return false;
 		}
+	},
+	updateRanking: function() {
+		if (Meteor.user().role) {
+			var users = Meteor.users.find({'emails.0.verified': true}).fetch();
+			users.forEach(function(user) {
+				var count = Justelecas.find({reciever: user._id, approved: true}).fetch().length;
+				var userRanking = {
+					userId: user._id,
+					fullname: user.profile.fullname,
+					avatar: user.profile.avatar || null,
+					count: count,
+					timestamp: new Date
+				}
+				if (UserRanking.findOne({userId: user._id})) {
+					UserRanking.update({userId: user._id}, {$set: userRanking});
+				} else {
+					UserRanking.insert(userRanking);
+				}
+			});
+		} else {
+			throw new Meteor.Error(500, 'Usuário não autenticado.');
+		}
+
 	}
 })
