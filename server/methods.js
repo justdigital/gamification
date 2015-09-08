@@ -126,7 +126,7 @@ Meteor.methods({
 	updateRanking: function() {
 		if (Meteor.user().role) {
 			var users = Meteor.users.find({'emails.0.verified': true}).fetch();
-			users.forEach(function(user) {
+			users.forEach(function(user, k) {
 				var count = Justelecas.find({reciever: user._id, approved: true}).fetch().length;
 				var userRanking = {
 					userId: user._id,
@@ -140,10 +140,34 @@ Meteor.methods({
 				} else {
 					UserRanking.insert(userRanking);
 				}
+				if (k+1 == users.length) {
+					var userSort = [];
+					var pos = 0;
+					users = UserRanking.find({}, {sort: {count: -1}}).fetch();
+					
+					users.forEach(function(user) {
+						pos++;
+						user['pos'] = pos;
+						userSort.push(user);
+					});
+
+					var lastCompare = 0;
+					var finalPosition = 1;
+
+					userSort.forEach(function(user, k) {
+						if (userSort[k].count < lastCompare) {
+							finalPosition++;
+							if (finalPosition <= k) {
+								finalPosition = k + 1;
+							}
+						}
+						lastCompare = userSort[k].count;
+						UserRanking.update({_id: user._id}, {$set: {pos: finalPosition}});
+					});
+				}
 			});
 		} else {
 			throw new Meteor.Error(500, 'Usuário não autenticado.');
 		}
-
 	}
 })

@@ -72,6 +72,24 @@ Router.route('/board', {
 	}
 });
 
+Router.route('/ranking', {
+	onBeforeAction: function() {
+		if (this.ready()) {
+			Session.set('activeNav', 'ranking');
+			this.subscribe('userranking');
+			this.next();
+		}
+	},
+	waitOn: function() {
+		return this.subscribe('userInfo', {profile: 1});
+	},
+	action: function() {
+		if (this.ready) {
+			this.render('ranking');
+		}
+	}
+});
+
 Router.route('/config', {
 	onBeforeAction: function() {
 		if (this.ready()) {
@@ -115,6 +133,7 @@ Router.route('/admin', {
 		}
 	} 
 });
+
 
 Router.plugin('ensureSignedIn');
 

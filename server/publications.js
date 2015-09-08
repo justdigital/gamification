@@ -61,6 +61,10 @@ Meteor.publish("justelecas", function() {
 	return Justelecas.find();
 });
 
+Meteor.publish("userranking", function() {
+	return UserRanking.find();
+});
+
 Meteor.publish("avatars", function() {
 	return Avatars.find();
 });

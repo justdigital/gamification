@@ -1,0 +1,17 @@
+template(name="ranking")
+	.container
+		h3.center Colocação
+		table.striped
+			thead
+				th Colocação
+				th Nome
+				th Quantidade
+			tbody
+				each rankingUser
+					tr 
+						+rankingRow
+
+template(name="rankingRow")
+	td.position #{pos}
+	td.name #{fullname}
+	td.qtd #{count}

@@ -185,5 +185,21 @@ Template.admin.events({
 				}
 			}
 		});
+	},
+	'click .update-ranking': function(e) {
+		Session.set('modalTitle', 'Ranking');
+		Session.set('modalBody', 'Tem certeza que deseja atualizar o ranking?');
+		$('#modal-prompt').openModal({
+			ready: function() {
+				Session.set('modalOpt', null);
+			},
+			complete: function() {
+				if (Session.get('modalOpt')) {
+					Meteor.call('updateRanking', function(err, data){
+						if (!err) Materialize.toast('Atualizado com sucesso!', 4000);
+					});
+				}
+			}
+		});
 	}
 })
