@@ -149,9 +149,7 @@ Meteor.methods({
 	checkFirst: function() {
 		var count = Meteor.users.find().fetch().length;
 		if (count == 1) {
-			console.log('chamei1');
 			var user = Meteor.users.findOne();
-			console.log('chamei2');
 			if (!user.role) {
 				Meteor.users.update({_id: user._id}, {$set: {role: 1}});
 				return true;
