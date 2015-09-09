@@ -72,3 +72,9 @@ Os pacotes utilizados no projeto foram:
 - Transformar config em uma imagem de Engrenagem
 - Login server-side
 - Interface admin: Faazer operações em massa
+- Anonimo
+	- Mural
+	- Ranking	
+- Kudo Card 
+	- Por categoria(Ajuda pessoal, Tecnica, Extra-time, etc);
+	- Montado dinamicamente
