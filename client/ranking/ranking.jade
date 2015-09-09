@@ -3,6 +3,7 @@ template(name="ranking")
 		h3.center Colocação
 		table.striped
 			thead
+				th
 				th Colocação
 				th Nome
 				th Quantidade
@@ -12,6 +13,8 @@ template(name="ranking")
 						+rankingRow
 
 template(name="rankingRow")
+	td.prize
+		.backgroud(class="#{prize}")
 	td.position #{pos}
 	td.name #{fullname}
 	td.qtd #{count}
