@@ -29,3 +29,5 @@ template(name="card")
 				p #{message}
 			.card-content
 				p.white-text {{> timeago when}}
+			if canDelete
+				a.btn.red.removeCard.right.waves-effect.waves-light Excluir
