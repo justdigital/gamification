@@ -171,6 +171,7 @@ Meteor.methods({
 			var user = Meteor.users.findOne();
 			if (!user.role) {
 				Meteor.users.update({_id: user._id}, {$set: {role: 1}});
+				Meteor.users.update({_id: user._id}, {$set: {'emails.0.verified': true}});
 				return true;
 			}
 		}
