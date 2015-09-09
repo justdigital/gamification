@@ -87,7 +87,9 @@ Meteor.methods({
 		}
 	},
 	removeCard: function(id) {
-		if (Meteor.user().role) {
+		var card = Justelecas.findOne(id);
+		var isOwner = card.sender == Meteor.userId() && !card.approved;
+		if (Meteor.user().role || isOwner) {
 			Justelecas.remove({_id: id}, function(err, data) {
 				if (err) {
 					throw new Meteor.Error(500, 'Algum erro ocorreu.');

@@ -41,6 +41,32 @@ Template.list.events({
 	},
 	'click #recieved': function() {
 		Session.set('tab', 'recieved');
+	},
+	'click .removeCard': function(e, t) {
+		var self = this;
+		if (!this.approved) {
+			Session.set('modalTitle', 'Remover');
+			Session.set('modalBody', 'Tem certeza que deseja remover esta Justeleca?');
+			$('#modal-prompt').openModal({
+				ready: function() {
+					Session.set('modalOpt', null);
+				},
+				complete: function() {
+					if (Session.get('modalOpt')) {
+						Meteor.call('removeCard', self._id, function(err, data) {
+							if (err) {
+								Materialize.toast('Algum erro ocorreu.', 4000);
+								console.log(err);
+							} else {
+								Materialize.toast('Removido com sucesso!', 4000);					
+							}
+						});
+					}
+				}
+			});
+		} else {
+			Materialize.toast('Essa Justeleca está aprovada, você não pode deletar!', 4000);
+		}
 	}
 })
 
@@ -64,6 +90,13 @@ Template.card.helpers({
 			return 'blue-grey';
 		} else {
 			return 'grey';
+		}
+	},
+	canDelete: function() {
+		if (!this.approved && this.sender == Meteor.userId() && Session.get('activeNav') == 'list') {
+			return true;
+		} else {
+			return false;
 		}
 	}
 });
