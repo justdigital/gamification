@@ -65,7 +65,6 @@ Os pacotes utilizados no projeto foram:
 		- Categoria
 		- Admin filtrar por aprovados ou não
 - Admin operações em massa
-- Traduzir textos dos forms de login
 - Kudo Card
 	- Adicionar campos especificos para categoria
 - Crop do Avatar
