@@ -69,7 +69,6 @@ Os pacotes utilizados no projeto foram:
 	- Adicionar campos especificos para categoria
 - Crop do Avatar
 - Transformar o config em uma engranagem
-- Trofeu na colocação do ranking (123)
 - Login/register server side
 - Admin cadastrar usuarios
 - Validação de email @justdigital.com.br
