@@ -1,16 +1,20 @@
 // Rotas simples.
 // Caminho da rota como primeiro parametro e uma função como segundo.
 
-Router.route('/', function() {
-	Session.set('activeNav', null);
-	this.render('home');
-});
-
-Router.route('/login', function() {
-	this.render('login');
+Router.route('/', {
+	seo: {
+		title: 'Home'
+	},
+	action: function() {
+		Session.set('activeNav', null);
+		this.render('home');
+	}
 });
 
 Router.route('/send', {
+	seo: {
+		title: 'Enviar Justelecas'
+	},
 	onBeforeAction: function() {
 		if (this.ready()) {
 			Session.set('activeNav', 'send');
@@ -37,6 +41,9 @@ Router.route('/send', {
 });
 
 Router.route('/list', {
+	seo: {
+		title: 'Minhas Justelecas'
+	},
 	onBeforeAction: function() {
 		if (this.ready()) {
 			Session.set('activeNav', 'list');
@@ -55,6 +62,9 @@ Router.route('/list', {
 });
 
 Router.route('/board', {
+	seo: {
+		title: 'Mural'
+	},
 	onBeforeAction: function() {
 		if (this.ready()) {
 			Session.set('activeNav', 'board');
@@ -73,6 +83,9 @@ Router.route('/board', {
 });
 
 Router.route('/ranking', {
+	seo: {
+		title: 'Resultado Atual'
+	},
 	onBeforeAction: function() {
 		if (this.ready()) {
 			Session.set('activeNav', 'ranking');
@@ -91,6 +104,9 @@ Router.route('/ranking', {
 });
 
 Router.route('/config', {
+	seo: {
+		title: 'Configuração'
+	},
 	onBeforeAction: function() {
 		if (this.ready()) {
 			Session.set('activeNav', 'config');
@@ -109,6 +125,9 @@ Router.route('/config', {
 });
 
 Router.route('/admin', {
+	seo: {
+		title: 'Painel Administrativo'
+	},
 	onBeforeAction: function() {
 		if (this.ready()) {
 			Session.set('activeNav', 'admin');
@@ -136,6 +155,14 @@ Router.route('/admin', {
 
 
 Router.plugin('ensureSignedIn');
+
+Router.plugin('seo', {
+  defaults: {
+  	title: 'Bem vindo ao',
+  	suffix: 'Gamification',
+  	separator: '-'
+  }
+});
 
 Router.configure({
   loadingTemplate: 'loading'

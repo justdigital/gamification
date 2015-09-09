@@ -54,12 +54,7 @@ Os pacotes utilizados no projeto foram:
 
 #### TO DO
 
-- Adicionar botão de remover justeleca enviada
-	- O usuario so poderá deletar a propria justeleca.
-	- O usuario so poderá deletar a justeleca se ela ainda não estiver aprovada.
-- Adicionar pacote para mudar a tag TITLE para cada página
-	- Cada página tera uma tag title diferente que será definida nas rotas
-- Montar o "ranking" (devemos mudar o nome)
+- Temporada
 	- Separar por "temporada" (tambem precisamos pensar num nome)
 	- Criar um painel administrativo pra genrenciar estas "temporadas" e quando será liberado os dados da nova "temporada"
 - Adicionar filtros nas páginas que listam justelecas
@@ -68,3 +63,14 @@ Os pacotes utilizados no projeto foram:
 		- Pessoa
 		- "Temporada"
 		- Categoria
+		- Admin filtrar por aprovados ou não
+- Admin operações em massa
+- Traduzir textos dos forms de login
+- Kudo Card
+	- Adicionar campos especificos para categoria
+- Crop do Avatar
+- Transformar o config em uma engranagem
+- Trofeu na colocação do ranking (123)
+- Login/register server side
+- Admin cadastrar usuarios
+- Validação de email @justdigital.com.br
