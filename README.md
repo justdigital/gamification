@@ -68,3 +68,7 @@ Os pacotes utilizados no projeto foram:
 		- Pessoa
 		- "Temporada"
 		- Categoria
+- Crop de imagem (Avatar)
+- Transformar config em uma imagem de Engrenagem
+- Login server-side
+- Interface admin: Faazer operações em massa
