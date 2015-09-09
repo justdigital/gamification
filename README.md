@@ -78,3 +78,7 @@ Os pacotes utilizados no projeto foram:
 - Kudo Card 
 	- Por categoria(Ajuda pessoal, Tecnica, Extra-time, etc);
 	- Montado dinamicamente
+- Admin 
+	- Poder cadastrar usuários
+- Cadastro de usuários
+	- Validação de e-mail just digital para usuários
